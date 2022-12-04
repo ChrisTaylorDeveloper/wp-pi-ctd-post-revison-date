@@ -6,14 +6,19 @@
  */
 
 function show_last_updated( $content ) {
-    $u_time = get_the_time( 'U' );
-    $u_modified_time = get_the_modified_time( 'U' );
+	$args = array(
+        'posts_per_page' => '1',
+		'orderby' => 'post_date_gmt',
+		'order'   => 'DESC',
+	);
 
-    if ( $u_modified_time >= $u_time + 86400 ) {
-        $rev_date_el = '<p class="last-updated">Updated ' . get_the_modified_time( 'j F Y' ) . '</p>';
-		return $rev_date_el . $content;
-    }
+	global $post;
+	$revision = wp_get_post_revisions( $post, $args );
 
-    return $content;
+	$revision_time = array_pop( $revision )->post_date_gmt;
+
+    $rev_date_el = '<p class="last-updated">Updated ' . $revision_time . '</p>';
+
+    return $rev_date_el . $content;
 }
 add_filter( 'the_content', 'show_last_updated' );
