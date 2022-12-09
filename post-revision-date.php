@@ -13,12 +13,9 @@ function show_last_updated( $content ) {
 	);
 
 	global $post;
-	$revision = wp_get_post_revisions( $post, $args );
-
-	$revision_time = array_pop( $revision )->post_date_gmt;
-
-    $rev_date_el = '<p class="last-updated">Updated ' . $revision_time . '</p>';
-
-    return $rev_date_el . $content;
+	$latest_version = wp_get_post_revisions( $post, $args );
+	$revision_time = array_pop( $latest_version )->post_date_gmt;
+    $revision_date_html = '<p class="last-updated">Updated: ' . date( 'd F Y', strtotime( $revision_time ) ) . ' </p>';
+    return $revision_date_html . $content;
 }
 add_filter( 'the_content', 'show_last_updated' );
