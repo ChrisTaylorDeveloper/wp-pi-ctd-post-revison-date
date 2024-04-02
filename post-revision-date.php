@@ -1,8 +1,10 @@
 <?php
 /**
- * Plugin Name: Post revison date
- * Author: Chris Taylor
- * Author URI: https://christaylordeveloper.co.uk
+ * Plugin Name:     CTD Post revison date
+ * Description:     Adds last Post / Page revision date to beginning of content.
+ * Version:         1.0
+ * Author:          Chris Taylor
+ * Author URI:      https://christaylordeveloper.co.uk
  */
 
 function show_last_updated( $content ) {
